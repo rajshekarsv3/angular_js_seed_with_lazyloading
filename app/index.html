@@ -28,7 +28,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#"><img alt='Brand' src='assets/image/logo.png'></a>
+        <a class="navbar-brand" href="#welcome"><img alt='Brand' src='assets/image/logo.png'></a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -47,7 +47,8 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
+  <!--div ng-view></div-->
+  <section ui-view></section>
 
   <div>Footer - If at all we need!!!</div>
 
@@ -56,11 +57,12 @@
   -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   
   <script src="app.js"></script>
-  <script src="welcome/welcome.js"></script>
-    <script src="login/login.js"></script>
-  <script src="view2/view2.js"></script>
+  <script src="welcome/welcomeController.js"></script>
+  <script src="login/loginController.js"></script>
+  
   <script src="check.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>

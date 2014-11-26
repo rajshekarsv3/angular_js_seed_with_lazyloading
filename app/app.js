@@ -3,9 +3,11 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
-  'myApp.welcome',
+  'welcome',
   'myApp.login',
-  'myApp.view2',
+  'ngCookies',
+  'ui.router',
+  
   'myApp.version',
   
 ]).
@@ -16,19 +18,18 @@ config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/welcome', {
+config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  $stateProvider.state('welcome', {
+  	url: '/welcome',
     templateUrl: 'welcome/welcome.html',
-    controller: 'welcomeCtrl'
+    //controller: 'welcomeCtrl'
   }).
-  when('/login',{
+  state('/login',{
+  	url: '/login',
   	templateUrl: 'login/login.html',
   	controller: 'loginCtrl'
-  }).
-  otherwise({
-    templateUrl: 'welcome/welcome.html',
-    controller: 'welcomeCtrl'
   });
+  $urlRouterProvider.otherwise('welcome');
 }]);
 
 
