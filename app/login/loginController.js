@@ -2,9 +2,15 @@
 
 var login = angular.module('myApp.login', ['ngRoute','ngCookies']);
 
-login.controller('loginCtrl', ['$http','$cookieStore','$scope',function($http,$cookieStore,$scope) {
-	
-   	console.log($scope.username);
+login.controller('loginCtrl', ['$http','$cookieStore','$scope','AuthService',function($http,$cookieStore,$scope,AuthService) {
+	$scope.credentials = {
+	    username: '',
+	    password: ''
+	  };
+   	$scope.login = function(credentials){
+   		AuthService.login(credentials);
+   		
+   	};
 	
 
 
