@@ -1,14 +1,14 @@
 <div>
-    <form class="col-md-12">
+    <form name="loginForm" class="col-md-12">
         <div class="form-group">
-            <input ng-model="credentials.username" type="text" class="form-control input-lg" placeholder="Email">
+            <input name="username" ng-model="credentials.username" type="text" class="form-control input-lg" placeholder="Email" required>
         </div>
         <div class="form-group">
-            <input ng-model="credentials.password" type="password" class="form-control input-lg" placeholder="Password">
+            <input name="password" ng-model="credentials.password" type="password" class="form-control input-lg" placeholder="Password" required>
         </div>
 
         <div class="form-group">
-            <button data-ng-click="login(credentials)" class="btn btn-primary btn-lg btn-block" >Sign In</button>
+            <button data-ng-disabled="loginForm.username.$invalid || loginForm.password.$invalid" data-ng-click="login(credentials)" class="btn btn-primary btn-lg btn-block" >Sign In</button>
 
         </div>
     </form>
