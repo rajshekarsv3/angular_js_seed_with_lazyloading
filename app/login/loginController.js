@@ -1,6 +1,6 @@
 'use strict';
 
-var login = angular.module('myApp.login', ['ngRoute','ngCookies']);
+var login = angular.module('myApp.login', ['ngRoute','ui.router']);
 
 login.controller('loginCtrl', ['$http','$cookieStore','$scope','AuthService',function($http,$cookieStore,$scope,AuthService) {
 	$scope.credentials = {
@@ -9,11 +9,23 @@ login.controller('loginCtrl', ['$http','$cookieStore','$scope','AuthService',fun
 	  };
    	$scope.login = function(credentials){
    		AuthService.login(credentials);
+   		$scope.roles = AuthService.roles;
    		
    	};
+   	$scope.test = function(){
+   		AuthService.getRoles();
+   	}
 	
 
 
     
 
+}])
+.
+config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+	$stateProvider.state('home', {
+	  	url: '/home',
+	    templateUrl: 'home/home.html',
+	    //controller: 'welcomeCtrl'
+	  })
 }]);
