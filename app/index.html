@@ -42,6 +42,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#login">Login</a></li>
 
+
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -54,6 +55,14 @@
 
   <!--div ng-view></div-->
   <section ui-view></section>
+  <div class="modal" ng-show="loadingView">
+  <!-- loadingView is a variable defined in the $rootScope -->
+
+  <!-- The loading animation is inspired by http://codepen.io/joni/details/FiKsd -->
+  <ul id="loading">
+    <li class="bar" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9]"></li>
+  </ul>
+</div>
 
   <div>Footer - If at all we need!!!</div>
 
@@ -69,7 +78,9 @@
   <script src="services/authenticationservice.js"></script>
   <script src="services/interceptorservice.js"></script>
   <script src="welcome/welcomeController.js"></script>
+  <script src="home/homecontroller.js"></script>
   <script src="login/loginController.js"></script>
+
 
   
 

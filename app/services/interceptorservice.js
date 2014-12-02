@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('myApp').factory('myHttpInterceptor', function($q,$location) {
+angular.module('myApp').factory('myHttpInterceptor',function($q,$location) {
+  var errorResponse = ['Please login to continue','for error code 1'];
   return {   
     'request': function(config) {      
       return config;
@@ -9,15 +10,17 @@ angular.module('myApp').factory('myHttpInterceptor', function($q,$location) {
       return $q.reject(rejection);      
     },
     'response': function(response) {
-      return response;
+
+        return response;
     },
     'responseError': function(rejection) {
-      if(rejection.status==401)
+      if(rejection.status==401 || rejection.status==500)
       {
-        $http.defaults.headers.common['X-User-Email'] = undefined;
-        $http.defaults.headers.common['X-User-Token'] = undefined;
+
         alert("You are not authorized");
-        $location.path('/welcome');        
+
+        $location.path('/login');  
+              
       }
       return $q.reject(rejection);
     }

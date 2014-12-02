@@ -5,6 +5,7 @@ angular.module('myApp', [
   'ngRoute',
   'welcome',
   'myApp.login',
+  'myApp.home',
   'ngCookies',
   'ui.router',
   
@@ -30,6 +31,19 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
   	controller: 'loginCtrl'
   });
   $urlRouterProvider.otherwise('welcome');
+}]).run(['$rootScope', function($root) {
+  $root.$on('$stateChangeStart', function(e, curr, prev) { 
+    console.log("route change start")
+    if (curr.$$route && curr.$$route.resolve) {
+      // Show a loading message until promises are not resolved
+      $root.loadingView = true;
+    }
+  });
+  $root.$on('$stateChangeSuccess', function(e, curr, prev) { 
+    // Hide loading message
+    console.log("route change success")
+    $root.loadingView = false;
+  });
 }]);
 
 
