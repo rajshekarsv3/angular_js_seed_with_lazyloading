@@ -17,7 +17,7 @@ factory('AuthService',function($http,$location,$rootScope,$q,$timeout){
 		},
 		hasAccess: function(destination){
 			destination	=	destination || null;
-			if(! sessionStorage.my_key && ! sessionStorage.my_email)
+			if(! sessionStorage.my_key || ! sessionStorage.my_email)
 			{
 				authService.logOut(1);
 				return;
