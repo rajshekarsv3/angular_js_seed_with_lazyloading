@@ -1,24 +1,12 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
+angular.module('myApp', [  
   'welcome',
   'myApp.login',
-  'myApp.home',
-  'ngCookies',
-  'ui.router',
-  
-  'myApp.version',
-  
+  'myApp.home',  
+  'ui.router',  
 ]).
-config(['$httpProvider', function ($httpProvider) {
-    
-    //$httpProvider.defaults.headers.post['Accept'] = 'application/json'
-
-    $httpProvider.defaults.useXDomain = true;
-	delete $httpProvider.defaults.headers.common['X-Requested-With'];
-}]).
 config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('welcome', {
   	url: '/welcome',
@@ -42,6 +30,11 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
   $root.$on('$stateChangeSuccess', function(e, curr, prev) { 
     // Hide loading message
     console.log("route change success")
+    $root.loadingView = false;
+  });
+  $root.$on('$stateChangeError', function(e, curr, prev) { 
+    // Hide loading message
+    console.log("route change Error")
     $root.loadingView = false;
   });
 }]);

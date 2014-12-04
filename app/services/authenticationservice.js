@@ -13,10 +13,7 @@ factory('AuthService',function($http,$location,ErrorHandlingService,$rootScope,$
     				$location.path('/home');
     			});
 		},
-		roles: {
-
-		},
-		hasAccess: function(destination){
+		hasAccess: function(destination){			
 			if(! sessionStorage.my_key && ! sessionStorage.my_email)
 			{
 				ErrorHandlingService.handleError(0);
@@ -26,37 +23,35 @@ factory('AuthService',function($http,$location,ErrorHandlingService,$rootScope,$
 			{
 				$http.defaults.headers.common['X-User-Email'] = sessionStorage.my_email;
     			$http.defaults.headers.common['X-User-Token'] = sessionStorage.my_key;
-    			$http.post("http://localhost:3000/api/v1/sessions/get_roles")
+    			var get_roles = $http.post("http://localhost:3000/api/v1/sessions/get_roles")
     			.then(function(response){
-    				$rootScope.roles=response['data']['roles'];		
-    			}).then(function(){    				
-    				//console.log(authService.checkAccess(destination));
-    				return authService.checkAccess(destination);    				
-    			});	
-			}
-			else
-			{
-				console.log(authService.checkAccess(destination));
-				return authService.checkAccess(destination);
-			}
+    				//$rootScope.roles=response['data']['roles']; 
+    				var role = response['data']['roles'];
+    				angular.forEach(role,function(value){
+    					console.log(value);
+    					switch(value){
+    						case "test_user":
+    							$rootScope.test_user = true;
+    							break;
+    					}
+    				});
+    				console.log($rootScope.test_user);
+    				authService.checkAccess(destination);   				
+    			});
+    			return get_roles;   
+   			}
+					
 		},
 		checkAccess: function(destination)
 		{
-			
-			
-			$http.get("http://localhost:3000/api/v1/"+destination)
+    		var check_access = $http.get("http://localhost:3000/api/v1/"+destination)
 				.then(function(response){
-					//console.log(response['data']['success']);
 					if(response['data']['success'] == false)
 					{
-						console.log("inside");
 						ErrorHandlingService.handleError(response['data']['error_code']);	
-									
 					}					
 				});
-				console.log($rootScope.roles);
-			return $rootScope.roles;
-			
+			return check_access;
 		}
 	}
 	return authService;
