@@ -5,18 +5,29 @@ angular.module('myApp', [
   'welcome',
   'myApp.login',
   'myApp.home',  
-  'ui.router',  
+  'ui.router',
+  'myApp.logout'  
 ]).
 config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('welcome', {
   	url: '/welcome',
     templateUrl: 'welcome/welcome.html',
+    resolve: {
+        access: function(AuthService)
+        {
+           return AuthService.welcomeCheck();
+        }
+      },
     //controller: 'welcomeCtrl'
   }).
   state('/login',{
   	url: '/login',
   	templateUrl: 'login/login.html',
   	controller: 'loginCtrl'
+  }).
+  state('/logout',{
+    url: '/logout',
+    controller: 'logoutCtrl'
   });
   $urlRouterProvider.otherwise('welcome');
 }]).run(['$rootScope', function($root) {
@@ -38,5 +49,7 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
     $root.loadingView = false;
   });
 }]);
+
+
 
 
