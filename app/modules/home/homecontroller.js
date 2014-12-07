@@ -11,7 +11,4 @@ angular.module('myApp.home', ['ngRoute','ui.router'])
 
     
 
-}])
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider,AuthService) {
-	
 }]);

@@ -1,7 +1,7 @@
 'use strict';
-
-angular.module('myApp').
-factory('AuthService',function($http,$location,$rootScope,$q,$timeout){
+define(function(){
+	
+return angular.module("authenticationservice",[]).factory('AuthService',function($http,$location,$rootScope,$q,$timeout){
 	var authService = {
 		auth_token: '',
 		email: '',
@@ -93,4 +93,6 @@ factory('AuthService',function($http,$location,$rootScope,$q,$timeout){
 		}
 	}
 	return authService;
+
+	});
 });

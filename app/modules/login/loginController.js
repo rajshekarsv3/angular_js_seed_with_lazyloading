@@ -1,7 +1,6 @@
 'use strict';
-
-var login = angular.module('myApp.login', ['ngRoute','ui.router','myApp.home']);
-login.controller('loginCtrl', ['$http','$scope','AuthService',function($http,$scope,AuthService) {
+define([],function(){
+	['$http','$scope','AuthService',function($http,$scope,AuthService) {
 	$http.defaults.headers.common['X-User-Email'] = undefined;
     $http.defaults.headers.common['X-User-Token'] = undefined;
     sessionStorage.clear();
@@ -13,17 +12,6 @@ login.controller('loginCtrl', ['$http','$scope','AuthService',function($http,$sc
    		AuthService.login(credentials);
    		$scope.roles = AuthService.roles;   		
    	};
-}])
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider,AuthService) {
-	$stateProvider.state('/home', {	  	   	
-	    resolve: {
-	    	access: function(AuthService)
-	    	{
-	    		 return AuthService.hasAccess("tests");
-	    	}
-	    },
-	    url: '/home',
-	    templateUrl: 'home/home.html',	
-	    controller: 'homeCtrl'
-	  })
-}]);
+   	$scope.$apply();
+}];
+});
