@@ -39,7 +39,7 @@ return angular.module("authenticationservice",[]).factory('AuthService',function
     							break;
     					}
     				});
-    				console.log($rootScope.test_user);
+    				
     				if(destination)
     					authService.checkAccess(destination);   				
     			});
@@ -60,10 +60,7 @@ return angular.module("authenticationservice",[]).factory('AuthService',function
 		},
 		logOut: function(err_code)
 		{
-			console.log("here");
-			console.log(err_code);
 			err_code = err_code || null;
-			console.log(err_code);
 			var errorResponse = ['User clicked logout','Please login to continue','for error code 1'];
 			if(err_code)
 				alert(errorResponse[err_code]);

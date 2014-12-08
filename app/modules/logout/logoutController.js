@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('myApp.logout', []);
-login.controller('logoutCtrl', ['AuthService',function(AuthService) {
+define([],function(){
+return ['AuthService',function(AuthService) {
 	AuthService.logOut();	
-}]);
+}];
+});

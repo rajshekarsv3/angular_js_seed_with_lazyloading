@@ -1,9 +1,12 @@
 'use strict';
 define([],function(){
-	['$http','$scope','AuthService',function($http,$scope,AuthService) {
+	return ['$http','$scope','AuthService','$rootScope',function($http,$scope,AuthService,$rootScope) {
+
+	$rootScope.show_authentication_bar=true;
 	$http.defaults.headers.common['X-User-Email'] = undefined;
     $http.defaults.headers.common['X-User-Token'] = undefined;
     sessionStorage.clear();
+    $rootScope.logged_in =false;
 	$scope.credentials = {
 	    username: '',
 	    password: ''

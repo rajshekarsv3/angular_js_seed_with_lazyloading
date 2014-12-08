@@ -12,7 +12,7 @@ define(['angular', 'app'], function(angular, app) {
            return AuthService.welcomeCheck();
         }
       },
-    //controller: 'welcomeCtrl'
+    controller: 'welcomeCtrl'
   }).
   state('/login',{
   	url: '/login',
@@ -20,9 +20,10 @@ define(['angular', 'app'], function(angular, app) {
   	controller: 'loginCtrl'
   }).
   state('/logout',{
-    url: 'modules/logout',
+    url: '/logout',
     controller: 'logoutCtrl'
-  }).state('/home', {         
+  }).
+  state('/home', {         
       resolve: {
         access: function(AuthService)
         {
@@ -30,7 +31,7 @@ define(['angular', 'app'], function(angular, app) {
         }
       },
       url: '/home',
-      templateUrl: 'home/home.html',  
+      templateUrl: 'modules/home/home.html',  
       controller: 'homeCtrl'
     });
   $urlRouterProvider.otherwise('welcome');
@@ -43,12 +44,12 @@ define(['angular', 'app'], function(angular, app) {
     }
   });
   $root.$on('$stateChangeSuccess', function(e, curr, prev) { 
-    // Hide loading message
+   
     console.log("route change success")
     $root.loadingView = false;
   });
   $root.$on('$stateChangeError', function(e, curr, prev) { 
-    // Hide loading message
+   
     console.log("route change Error")
     $root.loadingView = false;
   });

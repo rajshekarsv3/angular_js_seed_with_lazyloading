@@ -1,7 +1,6 @@
 'use strict';
-
-angular.module('myApp.home', ['ngRoute','ui.router'])
-.controller('homeCtrl', ['$rootScope','$http','$scope','AuthService',function($rootScope,$http,$scope,AuthService) {
+define([],function(){
+return ['$rootScope','$http','$scope','AuthService',function($rootScope,$http,$scope,AuthService) {
 
    	
 
@@ -9,6 +8,7 @@ angular.module('myApp.home', ['ngRoute','ui.router'])
 	
 
 
-    
+   $scope.$apply(); 
 
-}]);
+}];
+});
